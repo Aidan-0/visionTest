@@ -63,9 +63,9 @@ int main(int argc, char* argv[])
 			break;
 		}
 		// Convert from BGR to HSV colorspace
-		cvtColor(frame, frame_HSV, COLOR_BGR2HSV);
+		cvtColor(frame, frame_HSV, COLOR_BGR2GRAY);
 		// Detect the object based on HSV Range Values
-		inRange(frame_HSV, Scalar(low_H, low_S, low_V), Scalar(high_H, high_S, high_V), frame_threshold);
+		//inRange(frame_HSV, Scalar(low_H, low_S, low_V), Scalar(high_H, high_S, high_V), frame_threshold);
 
 		//morphological opening (remove small objects from the foreground)
 		erode(frame_HSV, frame_HSV, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
