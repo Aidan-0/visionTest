@@ -154,9 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="frcSource.cpp" />
+    <ClCompile Include="frcColor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frcColor.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

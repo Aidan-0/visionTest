@@ -1,3 +1,4 @@
+/*
 #include "opencv2/imgproc.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/videoio.hpp"
@@ -11,7 +12,7 @@ int main() {
 	int thresh = 0;
 	VideoCapture cam;
 	Mat frame, frameGray, frameInvert, frameBin;
-	cam.open(1);
+	cam.open(0);
 
 	for (;;) {
 
@@ -33,3 +34,4 @@ int main() {
 
 	}
 }
+*/
