@@ -13,7 +13,7 @@ int main() {
 	VideoCapture cam;
 	Mat frame, frameHSV, frameRange, frameDone;
 	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3), Point(-1, -1));
-	cam.open(1);
+	cam.open(0);
 
 	int lowH = 0;
 	int lowS = 0;
@@ -36,12 +36,18 @@ int main() {
 		inRange(frameHSV, Scalar(lowH, lowS, lowV), Scalar(highH, highS, highV), frameRange);
 		morphologyEx(frameRange, frameDone, MORPH_OPEN, kernel, Point(-1, -1), 1);
 		
+		Mat canny_output;
+		Canny(frameRange, canny_output, thresh, thresh * 2);
+
 		vector<vector<Point> > contours;
 		vector<Vec4i> hierarchy;
+
+		Mat draw = Mat::zeros(canny_output.size(), CV_8UC3);
+
 		findContours(frameDone, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE, Point(0, 0));
 		for (size_t i = 0; i < contours.size(); i++)
 		{
-			drawContours(draw, contours, i, Scalar(255, 0, 255), 3, 8, hierarchy, 0, Point());
+			drawContours(draw, contours, i, Scalar(0, 0, 255), 3, 8, hierarchy, 0, Point());
 		}
 		
 		namedWindow("Sliders");
@@ -52,6 +58,7 @@ int main() {
 		createTrackbar("lowV", "Sliders", &lowV, 255);
 		createTrackbar("highV", "Sliders", &highV, 255);
 		imshow("Hello :)", frameDone);
+		imshow("Drawings", draw);
 		char keypress = waitKey(10);
 		if (keypress == 'q' || keypress == 27) break;
 
